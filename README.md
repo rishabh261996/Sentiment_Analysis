@@ -52,7 +52,7 @@ To run this project locally, follow these steps:
     ```bash
     flask run
     ```
-    The application will be accessible at `http://localhost:5000`.
+   
 
 ## Usage
 1. Enter text into the input box on the homepage.
