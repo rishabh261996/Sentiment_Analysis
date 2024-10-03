@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,6 +16,7 @@
         <!-- Header Section -->
         <div class="text-center">
             <h1>SentimentScope</h1>
+            <p>Analyze the emotion behind the text you provide!</p>
         </div>
 
         <!-- Form Section -->
@@ -25,7 +26,7 @@
                     <div class="form-group">
                         <textarea class="form-control" name="text" rows="5" placeholder="Enter your text for sentiment analysis..." required></textarea>
                     </div>
-                    <input type="submit" value="Analyze Text" class="btn btn-primary">
+                    <input type="submit" value="Analyze Text" class="btn btn-primary btn-block">
                 </form>
             </div>
         </div>
@@ -35,31 +36,42 @@
         <div class="row mt-5">
             <div class="col-lg-8 mx-auto">
                 <div class="text-center">
-                    <h1>Results:</h1>
-                </div>
-                <!-- VADER Sentiment Results -->
-                <div class="card-body d-flex text-center align-items-center justify-content-center">
-                    <div class="chart-title col-lg-6 mx-auto">
-                        <h4>Vader Sentiment Analysis</h4>
-                        <p>Positive: {{ sentiment['pos'] * 100 }}%</p>
-                        <p>Neutral: {{ sentiment['neu'] * 100 }}%</p>
-                        <p>Negative: {{ sentiment['neg'] * 100 }}%</p>
-                        <p>Compound: {{ sentiment['compound'] * 100 }}%</p>
-                    </div>
-
-                    <!-- Custom Model Sentiment Result -->
-                    <div class="chart-title col-lg-6 mx-auto">
-                        <h4>Custom Model Sentiment Analysis</h4>
-                        <p>Custom Model Positive: {{ sentiment['custom_model_positive'] * 100 }}%</p>
-                    </div>
+                    <h2>Sentiment Analysis Results</h2>
+                    <p>Your text was analyzed for its emotional tone. Here’s what we found:</p>
                 </div>
 
-                <!-- Visualization Section -->
-                <div class="card-body d-flex text-center align-items-center justify-content-center">
-                    <!-- Bar Chart for VADER results -->
-                    <div id="barChart" class="col-lg-6"></div>
-                    <!-- Gauge Chart for Custom Model result -->
-                    <div id="gauge" class="col-lg-6"></div>
+                <!-- VADER Sentiment Results Explanation -->
+                <div class="card-body d-flex justify-content-center">
+                    <div class="chart-title col-lg-6">
+                        <h4>Vader Sentiment Breakdown</h4>
+                        <p><strong>Positive Sentiment:</strong> {{ sentiment['pos'] * 100 }}%</p>
+                        <p><strong>Neutral Sentiment:</strong> {{ sentiment['neu'] * 100 }}%</p>
+                        <p><strong>Negative Sentiment:</strong> {{ sentiment['neg'] * 100 }}%</p>
+                        <p><strong>Overall Compound Sentiment:</strong> {{ sentiment['compound'] * 100 }}%</p>
+                    </div>
+
+                    <!-- Custom Model Sentiment Explanation -->
+                    <div class="chart-title col-lg-6">
+                        <h4>Custom Model Prediction</h4>
+                        <p><strong>Our advanced model estimates the positivity of your text at:</strong> {{ sentiment['custom_model_positive'] * 100 }}%</p>
+                        <p><em>The higher this number, the more positive your text is likely to be.</em></p>
+                    </div>
+                </div>
+
+                <!-- Visualization Section with Simple Descriptions -->
+                <div class="card-body d-flex justify-content-center">
+                    <!-- Bar Chart for VADER results with description -->
+                    <div class="col-lg-6">
+                        <h5>Sentiment Breakdown (Graph)</h5>
+                        <p>This chart shows the proportions of positive, neutral, and negative sentiment in your text:</p>
+                        <div id="barChart"></div>
+                    </div>
+                    <!-- Gauge Chart for Custom Model result with description -->
+                    <div class="col-lg-6">
+                        <h5>Overall Positivity (Gauge)</h5>
+                        <p>The gauge shows how positive our advanced model considers your text to be:</p>
+                        <div id="gauge"></div>
+                    </div>
                 </div>
             </div>
         </div>
