@@ -1,12 +1,19 @@
 from flask import Flask, render_template, request
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 app = Flask(__name__)
+analyzer = SentimentIntensityAnalyzer()
 
-@app.route("/", methods=["GET", "POST"])
+@app.route('/')
 def index():
-    # TODO: Write the code that calls the sentiment analysis functions here.
-    # hint: use request.method == "POST"
     return render_template('form.html')
 
-if __name__ == "__main__":
-    app.run()
+@app.route('/submit', methods=['POST'])
+def submit():
+    if request.method == 'POST':
+        text = request.form['text']
+        sentiment = analyzer.polarity_scores(text)
+        return render_template('form.html', sentiment=sentiment)
+
+if __name__ == '__main__':
+    app.run(debug=True)
